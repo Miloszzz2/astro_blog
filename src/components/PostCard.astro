@@ -1,0 +1,31 @@
+---
+const { post } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+import { Image } from 'astro:assets';
+---
+
+{
+  post.data.imagePath ? (
+    <div class='border-zinc-800 border-4 rounded-xl flex justify-center items-center swiper-slide '>
+      <a href={`/posts/${post.slug}`}>
+        <Image src={post.data.imagePath} alt='dsd' />
+
+        <h1 class='text-center text-2xl font-bold my-4'>{post.data.title}</h1>
+        <h1 class='text-center text-xl font-bold mb-4'>
+          {post.data.createdAt.toLocaleDateString('pl-PL', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </h1>
+      </a>
+    </div>
+  ) : (
+    ''
+  )
+}

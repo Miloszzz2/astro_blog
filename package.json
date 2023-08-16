@@ -7,9 +7,25 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "create-new-post": "node createPost.js"
   },
   "dependencies": {
-    "astro": "^2.10.7"
+    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/react": "^2.2.1",
+    "@astrojs/tailwind": "^4.0.0",
+    "@fontsource/poppins": "^5.0.8",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "astro": "^2.10.7",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.268.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.6"
   }
 }

@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+const allBlogPosts = await getCollection('posts', ({ data }) => {
+  return data.draft !== true;
+});
+import { ArrowRight, ArrowLeft } from 'lucide-react';
+---
+
+<div class='swiper w-11/12 !overflow-y-visible'>
+  <div class='swiper-wrapper'>
+    {
+      allBlogPosts.reverse().map((post, i) => {
+        if (i < 6) return <PostCard post={post} />;
+      })
+    }
+  </div>
+
+  <div class='swiper-scrollbar !relative !-bottom-6 !w-full !left-0'></div>
+</div>
+<ArrowRight
+  className='swiper-button-next !top-[calc(50%+34px)]'
+  color='white'
+/>
+<ArrowLeft
+  className='swiper-button-prev !top-[calc(50%+34px)] '
+  color='white'
+/>
+
+<script is:inline>
+  new Swiper('.swiper', {
+    slidesPerView: 4,
+    spaceBetween: 40,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>

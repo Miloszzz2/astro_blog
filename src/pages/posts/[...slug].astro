@@ -1,0 +1,18 @@
+---
+import { getEntry } from 'astro:content';
+import PostLayout from '@/layouts/PostLayout.astro';
+// 1. Get the slug from the incoming server request
+const { slug } = Astro.params;
+if (slug === undefined) {
+  throw new Error('Slug is required');
+}
+// 2. Query for the entry directly using the request slug
+const entry = await getEntry('posts', slug);
+// 3. Redirect if the entry does not exist
+if (entry === undefined || entry.data.draft === true) {
+  return Astro.redirect('/404');
+}
+const { Content } = await entry.render();
+---
+
+<PostLayout post={entry}><Content /></PostLayout>
