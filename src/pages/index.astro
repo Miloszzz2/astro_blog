@@ -1,8 +1,11 @@
 ---
+export const prerender = true;
 import Layout from '@/layouts/Layout.astro';
 import { Input } from '@/components/ui/input';
 import { Search, ArrowDown } from 'lucide-react';
 import Posts from '@/components/Posts.astro';
+import MainSection from '@/components/MainSection.astro';
+import LeagueTabsSection from '@/components/LeagueTabsSection.jsx';
 ---
 
 <Layout title='Welcome to Astro.'>
@@ -17,7 +20,8 @@ import Posts from '@/components/Posts.astro';
     </div>
   </nav>
   <main class='pt-12 px-4'>
-    <section class='flex justify-center gap-10 flex-col relative'>
+    <MainSection />
+    <section class='flex justify-center gap-10 flex-col relative my-12'>
       <h1 class='text-2xl text-white pl-4'>
         Latest Posts <ArrowDown
           color='white'
@@ -25,6 +29,12 @@ import Posts from '@/components/Posts.astro';
         />
       </h1>
       <Posts />
+    </section>
+    <section class='py-24'>
+      <h1 class='text-2xl text-white pl-4'>
+        Leagues <ArrowDown color='white' className='inline-flex ml-1 mb-1' />
+      </h1>
+      <LeagueTabsSection client:visible />
     </section>
   </main>
 </Layout>

@@ -11,7 +11,15 @@ interface Props {
 <Layout title={post.data.title}>
   <main>
     {
-      post.data.imagePath ? <Image src={post.data.imagePath} alt='dsd' /> : ''
+      post.data.imagePath ? (
+        <Image
+          src={post.data.imagePath}
+          alt='dsd'
+          transition:name={post.slug}
+        />
+      ) : (
+        ''
+      )
     }<h1>{post.data.title}</h1>
     <p>Post author: {post.data.author}</p>
     <p>{post.data.description}</p>

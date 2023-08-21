@@ -1,17 +1,25 @@
 ---
+export const prerender = true;
 import { getCollection } from 'astro:content';
-import PostCard from './PostCard.astro';
+import PostCard from './Post.astro';
 
 const allBlogPosts = await getCollection('posts', ({ data }) => {
   return data.draft !== true;
 });
+allBlogPosts
+  .sort((a, b) => {
+    const numberA = parseInt(a.id.match(/post-(\d+)\.md/)![1]) as number;
+    const numberB = parseInt(b.id.match(/post-(\d+)\.md/)![1]) as number;
+    return numberA - numberB;
+  })
+  .reverse();
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 ---
 
 <div class='swiper w-11/12 !overflow-y-visible'>
   <div class='swiper-wrapper'>
     {
-      allBlogPosts.reverse().map((post, i) => {
+      allBlogPosts.map((post, i) => {
         if (i < 6) return <PostCard post={post} />;
       })
     }
@@ -27,7 +35,6 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
   className='swiper-button-prev !top-[calc(50%+34px)] '
   color='white'
 />
-
 <script is:inline>
   new Swiper('.swiper', {
     slidesPerView: 4,

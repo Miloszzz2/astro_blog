@@ -10,10 +10,15 @@ const mdDirectory = path.join(__dirname, './src/content/posts');
 
 const existingFiles = fs
   .readdirSync(mdDirectory)
-  .filter((file) => file.endsWith('.md'));
+  .filter((file) => file.match(/^post-(\d+)\.md$/)) // Filter for files matching the pattern
+  .sort((a, b) => {
+    const numberA = parseInt(a.match(/post-(\d+)\.md/)[1]);
+    const numberB = parseInt(b.match(/post-(\d+)\.md/)[1]);
+    return numberA - numberB; // Sort numerically
+  });
+
 const lastFile = existingFiles[existingFiles.length - 1];
 const lastNumber = parseInt(lastFile.match(/post-(\d+)\.md/)[1]);
-
 const newNumber = lastNumber + 1;
 const newFileName = `post-${newNumber}.md`;
 const creationDate = getCurrentDate();
@@ -27,6 +32,7 @@ author: Himanshu
 description: Find out what makes Astro awesome!
 createdAt: ${creationDate}
 imagePath: ../images/post-1/rocket.png
+league: LaLiga
 ---
 
 This is a post written in Markdown.`

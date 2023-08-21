@@ -10,8 +10,10 @@ const postsCollection = defineCollection({
       author: z.string(),
       description: z.string(),
       draft: z.boolean().optional(),
-      imagePath: image().optional(),
+      imagePath: image(),
       createdAt: z.date(),
+      league: z.string(),
+      shortenDescription: z.string().optional(),
     }),
 });
 

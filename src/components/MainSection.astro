@@ -1,0 +1,71 @@
+---
+import Image from 'astro/components/Image.astro';
+import { getCollection } from 'astro:content';
+import { Button } from './ui/button';
+const allBlogPosts = await getCollection('posts', ({ data }) => {
+  return data.draft !== true;
+});
+allBlogPosts.sort((a, b) => {
+  const numberA = parseInt(a.id.match(/post-(\d+)\.md/)![1]) as number;
+  const numberB = parseInt(b.id.match(/post-(\d+)\.md/)![1]) as number;
+  return numberA - numberB;
+});
+const mainPost = allBlogPosts.reverse()[0];
+const otherPosts = allBlogPosts.slice(1, 4);
+
+import { ArrowRight } from 'lucide-react';
+---
+
+<section class='m-auto flex justify-center overflow-hidden w-4/5'>
+  <div
+    class='flex flex-col justify-center items-center gap-4 border-r-2 border-zinc-700 w-3/5'
+  >
+    <Image
+      src={mainPost.data.imagePath}
+      alt={mainPost.data.title}
+      width={'400'}
+      loading={'eager'}
+    />
+    <h1 class='text-3xl text-center font-bold'>{mainPost.data.title}</h1>
+    <p class='text-center'>{mainPost.data.shortenDescription}</p>
+    <Button variant={'secondary'} className='bg-main'>
+      <a href=`posts/${mainPost.slug}` class='text-lg flex items-center gap-2'
+        >Read article <ArrowRight className='inline-block' height={'20'} />
+      </a>
+    </Button>
+  </div>
+  <div class='flex flex-col w-2/5'>
+    {
+      otherPosts.map((post, i) => {
+        return (
+          <div>
+            <div
+              class={`flex items-center p-2 ${
+                i < 2 ? 'border-b-2 border-zinc-700' : ''
+              }`}
+            >
+              <Image
+                src={post.data.imagePath}
+                alt={post.data.title}
+                height={'185'}
+              />
+              <div class='pl-6'>
+                <>
+                  <>
+                    <a href={`/posts/${post.slug}`} class=''>
+                      <h1 class='font-bold text-2xl hover:underline'>
+                        {post.data.title}
+                      </h1>
+                    </a>
+                  </>
+                  <br />
+                </>
+                <p>{post.body} </p>
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>
