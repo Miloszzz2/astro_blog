@@ -1,10 +1,10 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import leagues from '../constants/leagues';
-import { getCollection } from 'astro:content';
-import Post from './TabPost';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import leagues from "../constants/leagues";
+import { getCollection } from "astro:content";
+import Post from "./TabPost";
 
 // Fetch blog posts
-const allBlogPosts = await getCollection('posts', ({ data }) => {
+const allBlogPosts = await getCollection("posts", ({ data }) => {
   return data.draft !== true;
 });
 allBlogPosts
@@ -18,7 +18,7 @@ allBlogPosts
 function LeagueTabsSection() {
   return (
     <div>
-      <Tabs defaultValue='LaLiga' className='w-4/5 m-auto'>
+      <Tabs defaultValue="LaLiga" className="w-4/5 m-auto">
         <TabsList>
           {leagues.map((league) => {
             return (
@@ -37,7 +37,7 @@ function LeagueTabsSection() {
 
           return (
             <TabsContent value={league} key={league}>
-              <div className='flex gap-4 mt-12 flex-wrap justify-center'>
+              <div className="flex gap-4 mt-12 flex-wrap justify-center">
                 {leaguePosts.map((post) => (
                   <Post post={post} key={post.data.title} />
                 ))}

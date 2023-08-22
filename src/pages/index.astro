@@ -1,40 +1,49 @@
 ---
 export const prerender = true;
-import Layout from '@/layouts/Layout.astro';
-import { Input } from '@/components/ui/input';
-import { Search, ArrowDown } from 'lucide-react';
-import Posts from '@/components/Posts.astro';
-import MainSection from '@/components/MainSection.astro';
-import LeagueTabsSection from '@/components/LeagueTabsSection.jsx';
+import Layout from "@/layouts/Layout.astro";
+import { Input } from "@/components/ui/input";
+import { Search, ArrowDown } from "lucide-react";
+import Posts from "@/components/Posts.astro";
+import MainSection from "@/components/MainSection.astro";
+import LeagueTabsSection from "@/components/LeagueTabsSection.jsx";
+import { Twitter } from "lucide-react";
 ---
 
-<Layout title='Welcome to Astro.'>
-  <nav class='flex justify-between items-center p-4'>
-    <div class='w-72'></div>
-    <h1 class='text-lime-400 text-4xl font-bold'>SPORTS+</h1>
+<Layout title="Welcome to Astro.">
+  <nav class="flex justify-between items-center p-4">
+    <div class="w-72"></div>
+    <h1 class="text-lime-400 text-4xl font-bold">SPORTS+</h1>
     <div
-      class='flex justify-center items-center rounded-md border border-zinc-800 px-2'
+      class="flex justify-center items-center rounded-md border border-zinc-800 px-2"
     >
-      <Search color='rgb(39 39 42)' />
-      <Input placeholder='Search' className='w-72 border-none' />
+      <Search color="rgb(39 39 42)" />
+      <Input placeholder="Search" className="w-72 border-none" />
     </div>
   </nav>
-  <main class='pt-12 px-4'>
+  <main class="pt-12 px-4">
     <MainSection />
-    <section class='flex justify-center gap-10 flex-col relative my-12'>
-      <h1 class='text-2xl text-white pl-4'>
+    <section class="flex justify-center gap-10 flex-col relative my-12">
+      <h1 class="text-2xl text-white pl-4">
         Latest Posts <ArrowDown
-          color='white'
-          className='inline-flex ml-1 mb-1'
+          color="white"
+          className="inline-flex ml-1 mb-1"
         />
       </h1>
       <Posts />
     </section>
-    <section class='py-24'>
-      <h1 class='text-2xl text-white pl-4'>
-        Leagues <ArrowDown color='white' className='inline-flex ml-1 mb-1' />
+    <section class="pt-24 pb-12">
+      <h1 class="text-2xl text-white pl-4">
+        Leagues <ArrowDown color="white" className="inline-flex ml-1 mb-1" />
       </h1>
       <LeagueTabsSection client:visible />
     </section>
   </main>
+  <footer
+    class="flex-col flex justify-center items-center pb-4 gap-2 text-zinc-500"
+  >
+    <a href="https://twitter.com/milosz005" class="flex gap-2 hover:underline">
+      <Twitter />Visit my twitter</a
+    >
+    <p>Sports+ All rights reserved ©</p>
+  </footer>
 </Layout>

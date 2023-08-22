@@ -1,34 +1,40 @@
 ---
 export const prerender = true;
 const { post } = Astro.props;
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  post: CollectionEntry<'posts'>;
+  post: CollectionEntry<"posts">;
 }
 
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 ---
 
 {
   post.data.imagePath ? (
-    <div class='border-zinc-800 border-4 rounded-xl flex justify-center items-center swiper-slide !h-auto'>
-      <a href={`/posts/${post.slug}`} class='flex flex-col items-center'>
-        <Image src={post.data.imagePath} alt='dsd' height={'250'} />
+    <div class="border-zinc-800 border-4 rounded-xl flex justify-center items-center swiper-slide !h-96">
+      <a href={`/posts/${post.slug}`} class="flex flex-col h-full w-full">
+        <Image
+          src={post.data.imagePath}
+          alt="dsd"
+          class="rounded-t-md h-3/5 w-full"
+        />
 
-        <h1 class='text-center text-2xl font-bold my-4 mx-2'>
-          {post.data.title}
-        </h1>
-        <h1 class='text-center text-xl font-bold mb-4'>
-          {post.data.createdAt.toLocaleDateString('pl-PL', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </h1>
+        <div class="flex flex-col justify-center h-2/5 py-8">
+          <h1 class="text-center text-2xl font-bold my-4 mx-2">
+            {post.data.title}
+          </h1>
+          <h1 class="text-center text-xl font-bold mb-4">
+            {post.data.createdAt.toLocaleDateString("pl-PL", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </h1>
+        </div>
       </a>
     </div>
   ) : (
-    ''
+    ""
   )
 }
