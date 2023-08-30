@@ -1,9 +1,8 @@
-import { date } from 'astro/zod';
-import { z, defineCollection } from 'astro:content';
+import { z, defineCollection } from "astro:content";
 
 // 2. Define a `type` and `schema` for each collection
 const postsCollection = defineCollection({
-  type: 'content', // v2.5.0 and later
+  type: "content", // v2.5.0 and later
   schema: ({ image }) =>
     z.object({
       title: z.string(),
